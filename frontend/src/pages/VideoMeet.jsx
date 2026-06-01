@@ -12,7 +12,6 @@ import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare'
 import ChatIcon from '@mui/icons-material/Chat'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonIcon from '@mui/icons-material/Person';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
@@ -63,8 +62,6 @@ export default function VideoMeetComponent() {
 
     let [videos, setVideos] = useState([])
 
-    let [meetingStartTime, setMeetingStartTime] = useState(null);
-    let [elapsedTime, setElapsedTime] = useState("00:00");
     let [participants, setParticipants] = useState({});
     let [showParticipants, setShowParticipants] = useState(false);
 
@@ -100,22 +97,7 @@ export default function VideoMeetComponent() {
         };
     }, [])
 
-    // Meeting timer
-    useEffect(() => {
-        if (!meetingStartTime) return;
-        const interval = setInterval(() => {
-            const diff = Math.floor((Date.now() - meetingStartTime) / 1000);
-            const hrs = Math.floor(diff / 3600);
-            const mins = Math.floor((diff % 3600) / 60);
-            const secs = diff % 60;
-            if (hrs > 0) {
-                setElapsedTime(`${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`);
-            } else {
-                setElapsedTime(`${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`);
-            }
-        }, 1000);
-        return () => clearInterval(interval);
-    }, [meetingStartTime]);
+
 
     let getDislayMedia = () => {
         if (screen) {
@@ -505,7 +487,6 @@ export default function VideoMeetComponent() {
     
     let connect = () => {
         setAskForUsername(false);
-        setMeetingStartTime(Date.now());
         getMedia();
     }
 
@@ -562,10 +543,6 @@ export default function VideoMeetComponent() {
                         <div className={styles.meetHeader}>
                             <h2 className={styles.logoText} onClick={() => window.location.href = "/home"}>Connectly</h2>
                             <div className={styles.headerRight}>
-                                <div className={styles.timerDisplay}>
-                                    <AccessTimeIcon style={{ fontSize: '1rem' }} />
-                                    <span>{elapsedTime}</span>
-                                </div>
                                 <div className={styles.participantCount}>
                                     <PeopleIcon style={{ fontSize: '1rem' }} />
                                     <span>{Object.keys(participants).length}</span>
@@ -590,7 +567,7 @@ export default function VideoMeetComponent() {
                                     <video
                                         data-socket={video.socketId}
                                         ref={ref => {
-                                            if (ref && video.stream) {
+                                            if (ref && video.stream && ref.srcObject !== video.stream) {
                                                 ref.srcObject = video.stream;
                                             }
                                         }}
