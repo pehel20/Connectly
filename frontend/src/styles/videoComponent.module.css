@@ -1,0 +1,527 @@
+/* Main Container */
+.meetVideoContainer {
+    display: flex;
+    height: 100vh;
+    background: linear-gradient(rgba(10, 14, 39, 0.85), rgba(10, 14, 39, 0.85)), url("../background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Header Bar */
+.meetHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), transparent);
+    z-index: 5;
+}
+
+.logoText {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+}
+
+.meetInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.45rem 1rem;
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.meetCodeLabel {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 500;
+}
+
+.meetCodeValue {
+    font-size: 0.95rem;
+    color: #FF9839;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.copyBtn {
+    color: white !important;
+    padding: 4px !important;
+    margin-left: 4px !important;
+    transition: all 0.2s ease !important;
+}
+
+.copyBtn:hover {
+    color: #FF9839 !important;
+    background: rgba(255, 152, 57, 0.12) !important;
+}
+
+/* Header Right Section */
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.timerDisplay {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.4rem 0.9rem;
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+}
+
+.participantCount {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 152, 57, 0.1);
+    border: 1px solid rgba(255, 152, 57, 0.2);
+    padding: 0.4rem 0.9rem;
+    border-radius: 12px;
+    color: #FF9839;
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+/* Main Video Area - fills remaining space */
+.mainArea {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.mainAreaWithChat {
+    /* Chat takes 320px, main area gets the rest */
+}
+
+/* Video Grid */
+.conferenceView {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 1.5rem;
+    padding-bottom: 6rem;
+}
+
+.videoTile {
+    flex: 0 1 auto;
+    max-width: 640px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    transition: all 0.3s ease;
+}
+
+.videoTile:hover {
+    border-color: rgba(255, 152, 57, 0.35);
+    box-shadow: 0 12px 36px rgba(255, 152, 57, 0.12);
+}
+
+.videoTile video {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 65vh;
+}
+
+.waitingMessage {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.15rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2rem 3rem;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+}
+
+/* Local Video - PIP style, bottom right */
+.meetUserVideo {
+    position: absolute;
+    bottom: 6rem;
+    right: 1.5rem;
+    height: 130px;
+    width: auto;
+    border-radius: 16px;
+    border: 2px solid rgba(255, 152, 57, 0.4);
+    z-index: 5;
+    transform: scaleX(-1);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    transition: all 0.3s ease;
+}
+
+.meetUserVideo:hover {
+    border-color: #FF9839;
+    transform: scale(1.05) scaleX(-1);
+}
+
+/* Controls Bar */
+.buttonContainers {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0 1.5rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+    z-index: 6;
+}
+
+.controlsBar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.controlsBar svg {
+    font-size: 1.5rem;
+}
+
+.controlBtn {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 14px !important;
+    padding: 10px !important;
+    margin: 0 4px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.controlBtn:hover {
+    background: rgba(255, 255, 255, 0.16) !important;
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.controlBtnActive {
+    color: #FF9839 !important;
+    background: rgba(255, 152, 57, 0.12) !important;
+    border-color: rgba(255, 152, 57, 0.25) !important;
+}
+
+.controlBtnActive:hover {
+    background: rgba(255, 152, 57, 0.2) !important;
+    border-color: rgba(255, 152, 57, 0.4) !important;
+}
+
+.controlBtnOff {
+    color: #ff6b6b !important;
+    background: rgba(255, 107, 107, 0.12) !important;
+    border-color: rgba(255, 107, 107, 0.25) !important;
+}
+
+.controlBtnOff:hover {
+    background: rgba(255, 107, 107, 0.2) !important;
+    border-color: rgba(255, 107, 107, 0.4) !important;
+}
+
+.endCallBtn {
+    background: #e53935 !important;
+    color: white !important;
+    border-radius: 14px !important;
+    margin-inline: 0.4rem !important;
+    border: 1px solid rgba(229, 57, 53, 0.2) !important;
+    padding: 10px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.endCallBtn:hover {
+    background: #d32f2f !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
+}
+
+/* Chat Panel - side panel */
+.chatRoom {
+    width: 330px;
+    height: 100vh;
+    background: rgba(10, 14, 39, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.25);
+    z-index: 5;
+}
+
+.chatContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatTitle {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: white;
+    padding: 1.4rem;
+    margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    letter-spacing: 0.02em;
+}
+
+.chattingDisplay {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.2rem;
+}
+
+.chatMessage {
+    margin-bottom: 0.9rem;
+    padding: 0.7rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.chatMessage:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatSender {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #FF9839;
+    margin: 0 0 0.2rem;
+}
+
+.chatText {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+.noMessages {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.9rem;
+    margin-top: 3rem;
+}
+
+.chattingArea {
+    display: flex;
+    gap: 0.6rem;
+    padding: 1rem 1.2rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.chatInput {
+    flex: 1;
+    padding: 0.75rem 0.9rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-size: 0.88rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.chatInput::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.chatInput:focus {
+    border-color: #FF9839;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 2px rgba(255, 152, 57, 0.15);
+}
+
+.chatSendBtn {
+    padding: 0.75rem 1.2rem;
+    background: linear-gradient(135deg, #FF9839, #D97500);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.chatSendBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(217, 117, 0, 0.4);
+}
+
+/* Participant List Items */
+.participantItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.9rem;
+    margin-bottom: 0.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.participantItem:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 152, 57, 0.2);
+}
+
+.participantAvatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 152, 57, 0.12);
+    border: 1.5px solid rgba(255, 152, 57, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.participantName {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+/* Emoji Picker */
+.emojiPickerWrapper {
+    position: relative;
+}
+
+.emojiTray {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+    padding: 0.5rem 0.6rem;
+    background: rgba(10, 14, 39, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    animation: trayPop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 20;
+}
+
+.emojiBtn {
+    font-size: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem 0.45rem;
+    border-radius: 10px;
+    transition: all 0.15s ease;
+    line-height: 1;
+}
+
+.emojiBtn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(1.25);
+}
+
+@keyframes trayPop {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.85) translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1) translateY(0);
+    }
+}
+
+/* Floating Reactions Overlay */
+.reactionsOverlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 15;
+    overflow: hidden;
+}
+
+.floatingReaction {
+    position: absolute;
+    bottom: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: floatUp 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.floatingEmoji {
+    font-size: 2.4rem;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+}
+
+.floatingReactionName {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2px 8px;
+    border-radius: 8px;
+    margin-top: 2px;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(-60px) scale(1.15);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-320px) scale(0.7);
+    }
+}
