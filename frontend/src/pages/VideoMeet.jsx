@@ -16,9 +16,9 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonIcon from '@mui/icons-material/Person';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
-// import server from '../environment';
+import server from '../environment';
 
-// const server_url = server;
+const server_url = server;
 
 var connections = {};
 
